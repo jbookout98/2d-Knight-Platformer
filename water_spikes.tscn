@@ -1,0 +1,141 @@
+[gd_scene load_steps=17 format=3 uid="uid://c7m07pnwhoqip"]
+
+[ext_resource type="Texture2D" uid="uid://c0yw2e8iwg0as" path="res://Sprites/Enviroment/waterWaves.png" id="1_5epd6"]
+[ext_resource type="Shader" path="res://water_spikes.gdshader" id="1_76tvn"]
+[ext_resource type="Texture2D" uid="uid://dy7vmfr2dhj38" path="res://Sprites/Enviroment/waterBottom.png" id="2_bcm8g"]
+[ext_resource type="Script" path="res://AnimationOfUVs.gd" id="3_687tf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y3jjy"]
+shader = ExtResource("1_76tvn")
+shader_parameter/motion = Vector2(8, 0)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 16)
+shader_parameter/frame_coords = Vector2(0, 0)
+
+[sub_resource type="Animation" id="Animation_tbxmt"]
+length = 0.70001
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_sd5vh"]
+resource_name = "waves"
+length = 0.583342
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ntxnk"]
+_data = {
+"RESET": SubResource("Animation_tbxmt"),
+"waves": SubResource("Animation_sd5vh")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yplhg"]
+atlas = ExtResource("1_5epd6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j20t3"]
+atlas = ExtResource("1_5epd6")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o2ql"]
+atlas = ExtResource("1_5epd6")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyt3n"]
+atlas = ExtResource("1_5epd6")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_117mc"]
+atlas = ExtResource("1_5epd6")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx5ky"]
+atlas = ExtResource("1_5epd6")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pv47y"]
+atlas = ExtResource("1_5epd6")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rdc74"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yplhg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j20t3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o2ql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyt3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_117mc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vx5ky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pv47y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="WaterSpikes" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_y3jjy")
+position = Vector2(0, -13)
+texture = ExtResource("1_5epd6")
+vframes = 7
+frame = 3
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 224)
+script = ExtResource("3_687tf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_ntxnk")
+}
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-3, 111)
+scale = Vector2(40.5969, 6.17734)
+texture = ExtResource("2_bcm8g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_repeat = 2
+sprite_frames = SubResource("SpriteFrames_rdc74")
+frame_progress = 0.867665

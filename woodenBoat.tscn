@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b35mx1kjy8np5"]
+
+[ext_resource type="Texture2D" uid="uid://c1jvotdo5876v" path="res://log.png" id="1_h8viy"]
+[ext_resource type="Script" path="res://EnemyMovingViaSword.gd" id="1_xvgmh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrgod"]
+size = Vector2(52, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4o2ho"]
+size = Vector2(37, 20)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_xvgmh")
+speed = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_rrgod")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("1_h8viy")
+region_enabled = true
+region_rect = Rect2(0, 0, 54, 32)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_4o2ho")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

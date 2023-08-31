@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c77w1qysksw2o"]
+
+[ext_resource type="Script" path="res://RespawnPoint.gd" id="1_ljnas"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kitvl"]
+size = Vector2(64, 128)
+
+[node name="Area2D" type="Area2D"]
+position = Vector2(388, -365)
+script = ExtResource("1_ljnas")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -17)
+shape = SubResource("RectangleShape2D_kitvl")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(8, 28)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

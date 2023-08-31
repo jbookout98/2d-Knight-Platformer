@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://45tjl6xo0jxq"]
+
+[ext_resource type="Script" path="res://Breakable.gd" id="1_wtuif"]
+[ext_resource type="Texture2D" uid="uid://c7r8blut3plb4" path="res://crate.png" id="1_x64td"]
+[ext_resource type="Texture2D" uid="uid://dt0kh833kn68v" path="res://brokenCrate.png" id="3_ls8ee"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ubhb"]
+size = Vector2(30, 32)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_wtuif")
+
+[node name="Sprite1" type="Sprite2D" parent="."]
+texture = ExtResource("1_x64td")
+
+[node name="Sprite2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_ls8ee")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3ubhb")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -20)

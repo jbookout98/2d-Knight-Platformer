@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfftqf1shiyw0"]
+
+[ext_resource type="Texture2D" uid="uid://bantq3yatt02e" path="res://fallingCrates.png" id="1_6us8g"]
+[ext_resource type="Script" path="res://ShakeItem.gd" id="1_my0ub"]
+
+[node name="Shake" type="Sprite2D"]
+texture = ExtResource("1_6us8g")
+script = ExtResource("1_my0ub")

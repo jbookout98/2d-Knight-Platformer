@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpl200i1l7hvg"]
+
+[ext_resource type="Script" path="res://CameraLimit.gd" id="1_03ar0"]
+[ext_resource type="Script" path="res://TargetFollower.gd" id="2_tmppv"]
+
+[node name="CameraController" type="Node2D"]
+script = ExtResource("1_03ar0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_tmppv")
